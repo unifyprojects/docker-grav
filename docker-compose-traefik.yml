@@ -18,11 +18,11 @@ services:
       - traefik.frontend.priority=50
       - traefik.frontend.rule=Host:domain.com 
     volumes:
-      - backup:/var/www/grav-admin/
+      - grav:/var/www/
     networks:
       - proxynetwork 
 volumes:
-  backup:
+  grav:
     external: true
 
 networks:
