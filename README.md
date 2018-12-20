@@ -10,26 +10,24 @@ This currently is pretty minimal and uses:
 * php7.2-acpu
 * php7.2-yaml
 
-## Note about building the image on Arch 
-if getting
-
-```
-E: dpkg was interrupted, you must manually run 'dpkg --configure -a' to correct the problem. 
-
-```
-while building it simply run the following on the host system
-```
-echo N | sudo tee /sys/module/overlay/parameters/metacopy
-```
 ## Building the image from Dockerfile
 
-```
+```console
 docker build -t grav:latest .
 ```
 
+> if you are recieving the follwoing error message while trying to build the image on Arch Linux :
+> ```console
+> E: dpkg was interrupted, you must manually run 'dpkg --configure -a' to correct the problem. 
+> ```
+> run the following on the host system : 
+> ```console
+> echo N | sudo tee /sys/module/overlay/parameters/metacopy
+> ```
+
 ## Running Grav Image with Latest Grav + Admin (not persistent):
 
-```
+```console
 docker run -p 8000:80 grav:latest
 ```
 
@@ -39,13 +37,13 @@ Point browser to `http://localhost/8000` and create user account...
 
 This assumes you have already downloaded a Grav package into a local folder. This is the best way to run Grav if you want to have your changes persisted between restarts of the docker container.
 
-```
+```console
 docker run -v /local/grav/install:/var/www/html:cached -p 8000:80/tcp grav:latest
 ```
 
 To run in the current directory you can use:
 
-```
+```console
 docker run -v `pwd`:/var/www/html:cached -p 8000:80/tcp grav:latest
 ```
 
