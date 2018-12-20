@@ -10,6 +10,17 @@ This currently is pretty minimal and uses:
 * php7.2-acpu
 * php7.2-yaml
 
+## Note about building the image on Arch 
+if getting
+
+```
+E: dpkg was interrupted, you must manually run 'dpkg --configure -a' to correct the problem. 
+
+```
+while building it simply run the following on the host system
+```
+echo N | sudo tee /sys/module/overlay/parameters/metacopy
+```
 ## Building the image from Dockerfile
 
 ```
