@@ -1,0 +1,31 @@
+version: '3'
+services:
+  site:
+    image: grav:latest
+    restart: always
+    environment:
+      - ADMIN_USER=user
+      - ADMIN_PASSWORD=password
+      - ADMIN_EMAIL=user@email.com
+      - ADMIN_PERMISSIONS=b
+      - ADMIN_FULLNAME=user name
+      - ADMIN_TITLE=title
+      - DOMAIN=domain.com
+      - GENERATE_CERTS=false
+    labels:
+      - traefik.port=80
+      - traefik.docker.network=webgateway
+      - traefik.frontend.priority=50
+      - traefik.frontend.rule=Host:domain.com 
+    volumes:
+      - backup:/var/www/grav-admin/
+    networks:
+      - proxynetwork 
+volumes:
+  backup:
+    external: true
+
+networks:
+    proxynetwork:
+      external: true
+  
